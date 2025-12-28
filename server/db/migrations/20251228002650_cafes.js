@@ -1,15 +1,19 @@
 /**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
+ * @param {import('knex').Knex} knex
  */
-exports.up = function(knex) {
-  
-};
+export async function up(knex) {
+  return knex.schema.createTable('cafes', (table) => {
+    table.increments('id')
+    table.string('name')
+    table.string('suburb')
+    table.string('city')
+    table.string('latitude')
+    table.string('longitude')
+    table.string('website')
+    table.timestamp('created_at')
+  })
+}
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = function(knex) {
-  
-};
+export async function down(knex) {
+  return knex.schema.dropTable('cafes')
+}

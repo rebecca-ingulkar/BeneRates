@@ -1,15 +1,15 @@
 /**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
+ * @param {import('knex').Knex} knex
  */
-exports.up = function(knex) {
-  
-};
+export async function up(knex) {
+  return knex.schema.createTable('review', (table) => {
+    table.increments('id')
+    table.integer('rating_id')
+    table.string('comment')
+    table.boolean('would_order_again')
+  })
+}
 
-/**
- * @param { import("knex").Knex } knex
- * @returns { Promise<void> }
- */
-exports.down = function(knex) {
-  
-};
+export async function down(knex) {
+  return knex.schema.dropTable('review')
+}
