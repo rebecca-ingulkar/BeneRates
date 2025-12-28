@@ -7,10 +7,8 @@ export async function up(knex) {
     table.string('name')
     table.string('suburb')
     table.string('city')
-    table.string('latitude')
-    table.string('longitude')
     table.string('website')
-    table.timestamp('created_at')
+    table.timestamp(true, true)
   })
 }
 

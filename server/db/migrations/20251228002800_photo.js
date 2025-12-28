@@ -7,7 +7,7 @@ export async function up(knex) {
     table.integer('egg_bene_id')
     table.integer('user_id')
     table.string('image_url')
-    table.timestamp('created_at')
+    table.timestamp(true, true)
   })
 }
 
