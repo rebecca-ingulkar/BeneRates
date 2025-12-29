@@ -8,7 +8,7 @@ export async function up(knex) {
     table.string('email')
     table.string('password')
     table.string('role')
-    table.timestamp('created_at')
+    table.timestamp(true, true)
   })
 }
 

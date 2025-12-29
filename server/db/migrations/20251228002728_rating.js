@@ -7,7 +7,7 @@ export async function up(knex) {
     table.integer('user_id')
     table.integer('egg_bene_id')
     table.integer('overall_score')
-    table.timestamp('created_at')
+    table.timestamp(true, true)
     })
 }
 
