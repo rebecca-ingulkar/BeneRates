@@ -5,3 +5,10 @@ export interface Cafe {
   city: string
   website: string
 }
+export interface CafeSummary {
+  id: number
+  name: string
+  suburb: string
+  avgRating: number
+  ratingCount: number
+}

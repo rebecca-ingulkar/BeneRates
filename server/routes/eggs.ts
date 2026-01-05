@@ -1,12 +1,12 @@
 import express from 'express'
-import * as db from '../db/db'
+import * as connection from '../db/cafes'
 
 const router = express.Router()
 
 //localhost:3000/api/v1/eggs
 router.get('/', async (req, res) => {
   try {
-    const eggs = await db.getBene()
+    const eggs = await connection.getBene()
     res.json(eggs)
     res.json({ eggs: eggs })
   } catch (error) {
