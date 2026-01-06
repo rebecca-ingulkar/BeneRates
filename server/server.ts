@@ -1,11 +1,11 @@
 import * as Path from 'node:path'
-import eggRoutes from './routes/eggs'
+import cafeRoutes from './routes/cafes'
 import express from 'express'
 
 const server = express()
 server.use(express.json())
 
-server.use('/api/v1/eggs', eggRoutes)
+server.use('/api/v1/cafes', cafeRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

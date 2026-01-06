@@ -11,11 +11,11 @@ interface CafeSummaryRow {
 
 export async function getCafeSummaries(): Promise<CafeSummary[]> {
   const results = (await db('cafes')
-    .join('egg_benes', 'egg_benes.cafe_id', 'cafes.id')
-    .join('ratings', 'ratings.egg_bene_id', 'egg_benes.id')
+    .join('egg_bene', 'egg_bene.cafe_id', 'cafes.id')
+    .join('rating', 'rating.egg_bene_id', 'egg_bene.id')
     .select('cafes.id', 'cafes.name', 'cafes.suburb')
-    .avg({ avgRating: 'ratings.overall_score' })
-    .count({ ratingCount: 'ratings.id' })
+    .avg({ avgRating: 'rating.overall_score' })
+    .count({ ratingCount: 'rating.id' })
     .groupBy('cafes.id', 'cafes.name', 'cafes.suburb')) as CafeSummaryRow[]
 
   return results.map((row) => ({
