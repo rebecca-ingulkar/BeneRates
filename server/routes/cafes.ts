@@ -7,6 +7,7 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   try {
     const cafes = await getCafeSummaries()
+    res.json(cafes)
     console.log('CAFES FROM DB', cafes)
   } catch (error) {
     console.error(error)

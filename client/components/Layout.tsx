@@ -4,12 +4,12 @@ export default function Layout() {
   return (
     <>
       <header>
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
+        <h1>Bene Rates</h1>
       </header>
       <main>
         <Outlet />
       </main>
-      <footer></footer>
+      <footer> Bene Rates Inc | 2026</footer>
     </>
   )
 }
