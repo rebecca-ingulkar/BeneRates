@@ -2,22 +2,22 @@ import db from './connection'
 import { AllRating } from '../../models/allRating'
 
 export async function addAllRating(payload: AllRating) {
-  const ratingId = await db('rating').insert({
+  const inserted = await db('rating').insert({
     user_id: payload.userId,
     egg_bene_id: payload.eggBeneId,
     overall_score: payload.overallScore,
   })
 
-  const ratingId = Array.isArray(ratingId) ? ratingId[0] : ratingId
+  const ratingId = Array.isArray(inserted) ? inserted[0] : inserted
 
-  if (oayload.comment || payload.wouldOrderAgain !== undefined) {
+  if (payload.comment || payload.wouldOrderAgain !== undefined) {
     await db('review').insert({
       rating_id: ratingId,
       comment: payload.comment ?? '',
       would_order_again: payload.wouldOrderAgain ?? null,
     })
   }
-  if (payload.imageURL) {
+  if (payload.imageUrl) {
     await db('photo').insert({
       egg_bene_id: payload.eggBeneId,
       user_id: payload.userId,
