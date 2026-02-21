@@ -3,9 +3,15 @@ import CafeList from './CafeList'
 
 export default function App() {
   return (
-    <div>
-      <CafeList />
-    </div>
+    <>
+      <div>
+        <CafeList />
+      </div>
+      {/* <div className="bg-red-500 p-4 text-white">Tailwind is working</div>
+      <div className="bg-primary p-4 text-background">Primary color box</div>
+      <div className="bg-primary p-4 text-background">Primary color test</div>
+      <div className="bg-primary p-6 text-white">Should be dark navy</div> */}
+    </>
   )
 }
 

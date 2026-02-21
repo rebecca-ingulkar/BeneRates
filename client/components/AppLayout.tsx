@@ -1,27 +1,52 @@
-import { Outlet } from 'react-router'
+import { Outlet, NavLink } from 'react-router'
 
 export default function AppLayout() {
   return (
-    <div className="bg-background text-primary flex min-h-screen">
+    <div className="flex min-h-screen bg-background text-primary">
       {/* Sidebar */}
-      <aside className="bg-primary text-background flex w-64 flex-col p-6">
-        <h1 className="text-accent mb-8 text-2xl font-bold">Egg Bene</h1>
+      <aside className="flex w-64 flex-col bg-primary p-6 text-background">
+        <h1 className="mb-10 text-2xl font-bold text-accent">Bene Rates</h1>
 
-        <nav className="flex flex-col gap-3">
-          <a href="/" className="hover:text-accent transition">
+        <nav className="flex flex-col gap-4">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `transition ${
+                isActive ? 'font-semibold text-accent' : 'hover:text-accent'
+              }`
+            }
+          >
             Home
-          </a>
-          <a href="/cafe" className="hover:text-accent transition">
+          </NavLink>
+
+          <NavLink
+            to="/cafe"
+            className={({ isActive }) =>
+              `transition ${isActive ? 'font-semibold text-accent' : 'hover:text-accent'}`
+            }
+          >
             Cafes
-          </a>
-          <a href="/ratings" className="hover:text-accent transition">
-            Rate
-          </a>
+          </NavLink>
+
+          <NavLink
+            to="/ratings"
+            className={({ isActive }) =>
+              `transition ${
+                isActive ? 'font-semibold text-accent' : 'hover:text-accent'
+              }`
+            }
+          >
+            Rate a Bene
+          </NavLink>
         </nav>
+        <div className="mt-auto pt-10 text-sm text-muted">
+          © 2026 Bene Rates
+        </div>
       </aside>
 
-      {/* 👇 THIS is where child routes render */}
-      <main className="flex-1 p-8">
+      {/* Main Content */}
+      <main className="flex-1 p-10">
         <Outlet />
       </main>
     </div>
