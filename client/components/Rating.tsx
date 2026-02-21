@@ -16,22 +16,31 @@ export default function RatingForm({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['ratings'] })
       queryClient.invalidateQueries({ queryKey: ['cafes'] })
+      setOverallScore(0)
+      setComment('')
+      setWouldOrderAgain('')
     },
   })
 
-  // const mutation = useMutation({
-  //   mutationFn: (payload: AllRating) => {
-  //     console.log('📦 payload sent', payload)
-  //     return addRating(payload)
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log('✅ success', data)
-  //     queryClient.invalidateQueries({ queryKey: ['ratings'] })
-  //   },
-  //   onError: (err) => {
-  //     console.error('❌ mutation error', err)
-  //   },
-  // })
+  const [categories, setCategories] = useState({
+    eggScore: null as number | null,
+    hollandaiseScore: null as number | null,
+    baseScore: null as number | null,
+    sideScore: null as number | null,
+    waitTime: null as number | null,
+    portionSize: null as number | null,
+    overallCafeScore: null as number | null,
+  })
+
+  const calculatedOverallScore = (() => {
+    const values = Object.values(categories).filter(
+      (v): v is number => v !== null,
+    )
+    if (values.length === 0) return 0
+
+    const sum = values.reduce((acc, val) => acc + val, 0)
+    return Number((sum / values.length).toFixed(1))
+  })()
 
   const [overallScore, setOverallScore] = useState<number>(0)
   const [comment, setComment] = useState('')
@@ -45,10 +54,18 @@ export default function RatingForm({
     mutation.mutate({
       userId,
       eggBeneId,
-      overallScore,
+      overallScore: calculatedOverallScore,
       comment,
       wouldOrderAgain:
         wouldOrderAgain === '' ? undefined : wouldOrderAgain === 'true',
+
+      eggScore: categories.eggScore ?? undefined,
+      hollandaiseScore: categories.hollandaiseScore ?? undefined,
+      baseScore: categories.baseScore ?? undefined,
+      sideScore: categories.sideScore ?? undefined,
+      waitTime: categories.waitTime ?? undefined,
+      portionSize: categories.portionSize ?? undefined,
+      overallCafeScore: categories.overallCafeScore ?? undefined,
     })
   }
   return (
